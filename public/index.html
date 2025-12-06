@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Search</title>
+</head>
+<body>
+    <h1>Recipe Finder</h1>
+
+    <input type="text" id="search" placeholder="Search recipe...">
+    <button onclick="searchRecipe()">Search</button>
+
+    <div id="results"></div>
+
+    <script>
+        async function searchRecipe() {
+            const q = document.getElementById("search").value;
+
+            const res = await fetch(`http://localhost:3000/api/recipes?q=${q}`);
+            const data = await res.json();
+
+            let output = "";
+
+            data.results.forEach(recipe => {
+                output += `
+                    <div style="margin-bottom:20px;">
+                        <h3>${recipe.title}</h3>
+                        <img src="${recipe.image}" width="200">
+                    </div>
+                `;
+            });
+
+            document.getElementById("results").innerHTML = output;
+        }
+    </script>
+</body>
+</html>
