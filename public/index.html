@@ -1,36 +1,39 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Recipe Search</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GourmetGuide - Discover Your Next Meal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-    <h1>Recipe Finder</h1>
+    <div class="container">
+        <nav class="navbar">
+            <a href="#" class="logo" onclick="navigateTo('home')">GourmetGuide</a>
+            <div class="nav-links">
+                <button onclick="navigateTo('home')">Home</button>
+                <button onclick="navigateTo('search')">Find Recipes</button>
+                <button onclick="navigateTo('favorites')">Favorites</button>
+                <button id="nav-profile-btn" onclick="navigateTo('profile')" style="display:none;">My Profile</button>
+                <button id="nav-login-btn" onclick="navigateTo('login')">Login</button>
+                <button id="nav-logout-btn" onclick="handleLogout()"
+                    style="display:none; background:#e74c3c;">Logout</button>
+            </div>
+        </nav>
 
-    <input type="text" id="search" placeholder="Search recipe...">
-    <button onclick="searchRecipe()">Search</button>
+        <main id="app">
+        </main>
+    </div>
 
-    <div id="results"></div>
-
-    <script>
-        async function searchRecipe() {
-            const q = document.getElementById("search").value;
-
-            const res = await fetch(`http://localhost:3000/api/recipes?q=${q}`);
-            const data = await res.json();
-
-            let output = "";
-
-            data.results.forEach(recipe => {
-                output += `
-                    <div style="margin-bottom:20px;">
-                        <h3>${recipe.title}</h3>
-                        <img src="${recipe.image}" width="200">
-                    </div>
-                `;
-            });
-
-            document.getElementById("results").innerHTML = output;
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
+
 </html>
